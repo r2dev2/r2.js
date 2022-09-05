@@ -17,23 +17,23 @@ import { html } from 'r2.js';
 
 const todos = [
   { task: 'install r2.js', done: false },
-	{ task: 'star r2.js', done: false },
-	{ task: 'tell friends to star r2.js', done: false }
+  { task: 'star r2.js', done: false },
+  { task: 'tell friends to star r2.js', done: false }
 ];
 
 const renderTodo = (todo, i) => html`
 <div class="todo">
-	<input type="checkbox" id="todo-${i}" ${todo.done && 'checked'}></input>
-	<label for="todo-${i}">${todo.task}</label>
+  <input type="checkbox" id="todo-${i}" ${todo.done && 'checked'}></input>
+  <label for="todo-${i}">${todo.task}</label>
 </div>
 `;
 
 const app = html`
-	<h1>Todos</h1>
-	<p>{todos.every(t => t.done) && 'Congratulations, you did everything!'}</p>
-	<div class="todos">
-	  ${todos.map(renderTodo)}
-	</div>
+  <h1>Todos</h1>
+  <p>{todos.every(t => t.done) && 'Congratulations, you did everything!'}</p>
+  <div class="todos">
+    ${todos.map(renderTodo)}
+  </div>
 `;
 ```
 
@@ -48,8 +48,8 @@ import { useState } from 'r2.js';
 
 const [ todos, setTodos, subTodos ] = useState([
   { task: 'install r2.js', done: false },
-	{ task: 'star r2.js', done: false },
-	{ task: 'tell friends to star r2.js', done: false }
+  { task: 'star r2.js', done: false },
+  { task: 'tell friends to star r2.js', done: false }
 ]);
 
 const [ allDone, setAllDone, subAllDone ] = useState(false);
@@ -64,30 +64,30 @@ subAllDone($allDone => $allDone && alert('Congratulations for doing everything')
 
 const renderTodo = (todo, i) => html`
 <div class="todo">
-	<input type="checkbox" id="todo-${i}" ${todo.done && 'checked'}></input>
-	<label for="todo-${i}">${todo.task}</label>
+  <input type="checkbox" id="todo-${i}" ${todo.done && 'checked'}></input>
+  <label for="todo-${i}">${todo.task}</label>
 </div>
 `;
 
 const createTodo = (todo, i) => {
-	const todoEl = renderTodo(todo, i);
+  const todoEl = renderTodo(todo, i);
 
-	const checkbox = todoEl.querySelector('input[type=checkbox]');
-	checkbox.addEventListener('change', () => {
-		const newTodos = [...todos()];
-		newTodos[i] = {...newTodos[i], done: checkbox.checked};
-		setTodos(newTodos);
-	});
+  const checkbox = todoEl.querySelector('input[type=checkbox]');
+  checkbox.addEventListener('change', () => {
+    const newTodos = [...todos()];
+    newTodos[i] = {...newTodos[i], done: checkbox.checked};
+    setTodos(newTodos);
+  });
 
-	return todoEl;
+  return todoEl;
 };
 
 const app = html`
-	<h1>Todos</h1>
-	<p>{allDone() && 'Congratulations, you did everything!'}</p>
-	<div class="todos">
-	  ${todos().map(createTodo)}
-	</div>
+  <h1>Todos</h1>
+  <p>{allDone() && 'Congratulations, you did everything!'}</p>
+  <div class="todos">
+    ${todos().map(createTodo)}
+  </div>
 `;
 ```
 
@@ -108,8 +108,8 @@ const coolFn2 = pipe(fn1, fn2, fn3);
 // will return the array but backwards (sorted by y)
 sortBy([
   { x: 0, y: 2 },
-	{ x: 1, y: 1 },
-	{ x: 2, y: 0 }
+  { x: 1, y: 1 },
+  { x: 2, y: 0 }
 ], 'y');
 
 // returns the result of cb if it succeeded, returns error if failed
@@ -117,7 +117,7 @@ sortBy([
 // in this invocation, it'll remove the element if it was found otherwise
 // do nothing
 suppress(() => {
-	document.querySelector('.something-to-remove').remove();
+  document.querySelector('.something-to-remove').remove();
 });
 
 // sleeps for 100 ms
