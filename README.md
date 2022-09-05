@@ -30,7 +30,7 @@ const renderTodo = (todo, i) => html`
 
 const app = html`
   <h1>Todos</h1>
-  <p>{todos.every(t => t.done) && 'Congratulations, you did everything!'}</p>
+  <p>${todos.every(t => t.done) && 'Congratulations, you did everything!'}</p>
   <div class="todos">
     ${todos.map(renderTodo)}
   </div>
@@ -84,7 +84,7 @@ const createTodo = (todo, i) => {
 
 const app = html`
   <h1>Todos</h1>
-  <p>{allDone() && 'Congratulations, you did everything!'}</p>
+  <p>${allDone() && 'Congratulations, you did everything!'}</p>
   <div class="todos">
     ${todos().map(createTodo)}
   </div>
