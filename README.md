@@ -35,6 +35,9 @@ const app = html`
     ${todos.map(renderTodo)}
   </div>
 `;
+
+// mount app to the document body
+document.body.appendChild(app);
 ```
 
 ### State Management
@@ -43,8 +46,10 @@ I love svelte stores but, they require me to install svelte. Unfortunately, the 
 
 We will now re-write the above todos example with useState to add reactivity.
 
+The below example is hosted at https://r2dev2.github.io/r2.js/todo.html
+
 ```javascript
-import { useState } from 'r2.js';
+import { html, useState } from 'r2.js';
 
 const [ todos, setTodos, subTodos ] = useState([
   { task: 'install r2.js', done: false },
@@ -82,13 +87,30 @@ const createTodo = (todo, i) => {
   return todoEl;
 };
 
+// TODO this app won't change whenever allDone changes or todos changes
 const app = html`
+<div id="app">
   <h1>Todos</h1>
-  <p>${allDone() && 'Congratulations, you did everything!'}</p>
-  <div class="todos">
-    ${todos().map(createTodo)}
-  </div>
+  <p class="congrats-msg" />
+  <div class="todos" />
+</div>
 `;
+
+subAllDone($allDone => {
+  app.querySelector('.congrats-msg').textContent = $allDone
+    ? 'Congratulations, you did everything!'
+    : '';
+});
+
+subTodos($todos => {
+  const container = app.querySelector('.todos');
+  const previousChildren = [...container.children];
+  $todos.map(createTodo).forEach(container.appendChild.bind(container));
+  previousChildren.forEach(e => e.remove());
+});
+
+// mount app to the document body
+document.body.appendChild(app);
 ```
 
 ### Various JS Utilities

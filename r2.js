@@ -21,11 +21,10 @@ export const html = (template, ...args) => {
   template.forEach((string, i) => {
     res.push(string);
     if (i == template.length) return;
-    if (args[i] == null || args[i] == undefined) return;
     if (args[i] instanceof Array) {
       args[i].forEach(arg => res.push(arg.outerHTML ?? arg));
     }
-    else {
+    else if (args[i]) {
       res.push(sanitizeHTML(args[i]));
     }
   });
