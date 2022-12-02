@@ -87,7 +87,6 @@ const createTodo = (todo, i) => {
   return todoEl;
 };
 
-// TODO this app won't change whenever allDone changes or todos changes
 const app = html`
 <div id="app">
   <h1>Todos</h1>
